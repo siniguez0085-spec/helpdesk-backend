@@ -25,15 +25,18 @@ exports.obtenerTickets = async (req, res) => {
 };
 
 // --- CONTROLADOR: Obtener un ticket por ID ---
-exports.obtenerTicketPorId = async (req, res) => {
+exports.obtenerTickets = async (req, res) => {
     try {
-        const ticket = await Ticket.findById(req.params.id);
-        if (!ticket) {
-            return res.status(404).json({ error: "Ticket no encontrado" });
-        }
-        res.json(ticket);
+        // Intentamos traer los tickets
+        const tickets = await Ticket.find();
+        res.status(200).json(tickets);
     } catch (error) {
-        res.status(500).json({ error: "Error al buscar el ticket" });
+        // Esto imprimirá el error real en los logs de Render
+        console.error("❌ ERROR DETALLADO EN EL BACKEND:", error.message);
+        res.status(500).json({ 
+            error: "Error al obtener los tickets", 
+            detalle: error.message 
+        });
     }
 };
 
