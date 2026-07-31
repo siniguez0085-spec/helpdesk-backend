@@ -14,7 +14,7 @@ app.use(express.json());
 const ticketRoutes = require('./routes/ticketRoutes');
 app.use('/tickets', ticketRoutes);
 
-// Ruta de prueba (Para el navegador)
+// Ruta de prueba
 app.get('/', (req, res) => {
   res.send('🚀 API HelpDesk funcionando correctamente');
 });
